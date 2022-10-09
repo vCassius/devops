@@ -1,0 +1,26 @@
+# Vincent 20221008 创建者: Vincent E-Mail: 46603415@qq.com
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: time-sync
+  name: time-sync
+  namespace: devops # 此处替换你的namespace
+spec:
+  selector:
+    matchLabels:
+      app: time-sync
+  template:
+    metadata:
+      labels:
+        app: time-sync
+    spec:
+      imagePullSecrets:
+        - name: registry-secret-xier
+      containers:
+      - image:  # 此处替换你的image url
+        imagePullPolicy: Always
+        name: time-sync
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN", "SYS_TIME"]
