@@ -38,7 +38,26 @@
   MySQL version: 8.0.30
   将获获取数据库: openapi_casbin 表数据
   table: casbin_rule
-  ```    
+  ```   
+#### rust-redis-checker
+- 为何开发
+  - 开发某次给我说在k8s pod内连不上redis,然后pod内又没有redis客户端,也无法安装navicat类的可视化工具,所以运维需要快速判断redis是否通畅,所以开发了此工具
+- 提供版本
+  - windows x86_64
+    - 二进制文件
+  - linux x86_64
+    - 二进制文件
+- 如何使用
+  `./rust-redis-checker 密码 host 端口 库名`
+  ```sh
+  ./rust-redis-checker 123456 127.0.0.1 6379 4
+  ```
+  `返回结果 会先set一个40秒过期的测试key在你制定的库分区,然后在查询key的值`
+  ```
+  设置Redis Key: vincent_test_checker Value: 30 过期时间: 40 秒 DB: 4 成功
+  查询到测试 key: vincent_test_checker value: 30  DB: 4 成功
+  恭喜,您的Redis联通测试通过
+  ```     
 #### 如有疑问请联系作者
 - E-Mail/QQ: 46603415@qq.com
 
