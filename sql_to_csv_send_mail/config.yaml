@@ -1,0 +1,41 @@
+fileName: "SQL备份.zip"
+mail:
+  # 是启用邮箱功能
+  enable: true
+  # 发送人邮箱（邮箱以自己的为准）
+  user: "admin@akiraka.net"
+  # 发送人邮箱的密码，现在可能会需要邮箱 开启授权密码后在pass填写授权码
+  pass: "passowrd"
+  # SMTP 发件服务器
+  host: "smtp.exmail.qq.com"
+  # 邮箱服务器端口
+  port: 465
+  # 邮件接收方 可以是多个接收人
+  # 备注 数组格式
+  addressee:
+    - "aka@akiraka.net"
+  # 设置邮件标题
+  title: "SQL备份-"
+  # 设置邮件内容
+  content: "SQL备份完成，请查收"
+mysql:
+  # 数据库账号
+  user: "root"
+  # 数据库密码
+  pass: "password"
+  # 数据库地址
+  host: "127.0.0.1"
+  # 数据库端口
+  port: 3306
+  # 数据库库名称
+  database: "aka"
+  # 是否开启自定义查询 语句
+  custom:
+    # 当 True 时 query 填写具体 sql语句 如: "SELECT * from sys_api"
+    # 当 false 时 query 填写表名称即可 如: sys_api
+    enable: true
+    query:
+      - "SELECT id,name from sys_api;"
+      - "SELECT * from sys_config"
+      # - "sys_api"
+      # - "sys_config"
