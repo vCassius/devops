@@ -1,0 +1,38 @@
+#Author: Vincent
+#E-Mail: 46603415@qq.com
+#github: https://github.com/Cassuis/devops
+trans_port:
+    # 此组代理转发信息的标记标签,仅标记作用
+  - label: 211
+    # 此组代理转发监听ip
+    ip: 0.0.0.0
+    # 监听端口
+    port: 30000
+    # 转发ip
+    destination_ip: 192.168.1.211
+    # 转发port
+    destination_port: 22
+    # 安保全模式,wl = 白名单模式 bl = 黑名单模式
+    safe_model: wl
+    # 描述此组代理转发的字符串
+    describe: 测试服务器
+    # 对应安全模式的分组
+    list:
+      # 标签,无实际意义,仅标记作用
+      - label: local
+        # ip组
+        ip:
+         - ip: 127.0.0.1
+           describe: 允许本地访问
+  - label: 212
+    ip: 0.0.0.0
+    port: 30001
+    destination_ip: 192.168.1.212
+    destination_port: 22
+    safe_model: wl
+    describe: 测试服务器
+    list:
+      - label: local_allow
+        ip:
+          - ip: 127.0.0.1
+            describe: 允许本地访问
