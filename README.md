@@ -15,6 +15,17 @@
   - 3.支持真机nginx
   - 4.支持容器化nginx
 #### 目前提供的二进制包
+##### backup-service [Kubernetes 对象转yaml 自定义备份服务]
+`可将kubernetes对象从ETCD中自定义扫描并且转换为yaml自动压缩备份上传至阿里云OSS,还原时只需要kubectl apply -f 备份目录`
+- 为何开发
+  众所周知,当前网上资料给出的Kubernetes集群备份方案均为完整备份ETCD,而真实业务可能是需要备份ETCD中的业务对象,比如 Deployment,Service,Namespace,Statefulsets等等,所以开发了此服务工具,用于自定义备份k8s业务原生对象并且自动压缩上传至阿里云OSS
+- 提供版本
+  - windows x86_64
+    - 二进制文件
+    - 默认配置文件
+  - linux x86_64
+    - 二进制文件
+    - 默认配置文件  
 ##### time-sync 
 - 为何开发
   - 开发某次找我说我们本地kubernetes集群内的pod时间和阿里云标准时间差值大于5秒了，导致阿里接口校验失败，我发现的确本地集群node时间会跑偏，于是开发了时间同步服务，用于阿里云集群节点时间自动校准,采用DaemonSets部署方式，每个节点长驻一个时间同步服务

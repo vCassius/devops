@@ -1,0 +1,69 @@
+#Author： Vincent
+#E-Mail: 46603415@qq.com
+#Github: https://github.com/Cassuis/devops
+#Description: 用于精确扫描ETCD自动备份Kubernetes原生对象
+system:
+  # 是否开启自动上传到阿里云OSS备份,需要配置aliYun OSS 信息
+  aliyun: true
+  # 是否删除本地备份,如果阿里云未OSS 备份未开启,本配置设置为true 无效
+  delete: false
+log:
+  logLevel: info
+  logFormat: json
+  logPath: ./logs
+  logFileName: 'app.log'
+  logFileMaxSize: 200
+  logFileMaxBackups: 10
+  logMaxAge: 365
+  logCompress: false
+  logStdout: true
+# ETCD 地址以及证书配置
+etcd:
+  endpoint: https://192.168.1.2:2379
+  ca: ./ca.crt
+  cert: ./server.crt
+  key: ./server.key
+#阿里云 AK 必须具有OSS对象的读写权限授权
+aliYun:
+  accessKeyId:
+  accessKeySecret:
+  ossEndpoint: oss-cn-hangzhou.aliyuncs.com
+  bucketName: devops-backup
+#备份对象配置
+backup:
+  #需要备份到的目录路径,支持绝对路径以及相对路径
+  dir: ./etcd-backup
+  #需要备份对象的例子 object/namespace 会自动扫描配置下的所有对象并且转换成yaml,如果开启OSS备份则上传OSS,未开启则知本地备份,还原时只需要 kubectl apply -f 目录即可
+  object:
+    - name: deployments/devops
+    - name: deployments/default
+    - name: deployments/ingress-nginx
+    - name: deployments/monitoring
+    - name: namespaces
+    - name: statefulsets/devops
+    - name: statefulsets/default
+    - name: statefulsets/ingress-nginx
+    - name: statefulsets/monitoring
+    - name: services/specs/devops
+    - name: services/specs/default
+    - name: services/specs/ingress-nginx
+    - name: services/specs/monitoring
+    - name: secrets/devops
+    - name: secrets/default
+    - name: secrets/ingress-nginx
+    - name: secrets/monitoring
+    - name: serviceaccounts/devops
+    - name: serviceaccounts/default
+    - name: serviceaccounts/ingress-nginx
+    - name: serviceaccounts/monitoring
+    - name: clusterroles/admin
+    - name: storageclasses
+    - name: persistentvolumes
+    - name: persistentvolumeclaims/devops
+    - name: persistentvolumeclaims/default
+    - name: persistentvolumeclaims/ingress-nginx
+    - name: persistentvolumeclaims/monitoring
+    - name: ingress/devops
+    - name: ingress/default
+    - name: ingress/ingress-nginx
+    - name: ingress/monitoring
